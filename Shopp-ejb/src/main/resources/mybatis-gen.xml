@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- Ubicación del JAR JDBC del gestor de Base de datos a usar, en este caso Postgresql  -->
+    <classPathEntry location="Shopp-ejb/src/main/resources/postgresql-9.3-1103.jdbc4.jar" />
+    <!--  Generaremos para MyBatis versión 3 -->
+    <context id="DB1" targetRuntime="MyBatis3">
+        
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+        <plugin type="py.com.konecta.mybatis.gen.extender.GenericDAOPlugin"/>
+        <!-- No generamos los comentarios -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        
+        <!--  Parámetros de conexión a la bd -->
+        <jdbcConnection driverClass="org.postgresql.Driver" 
+                        connectionURL="jdbc:postgresql://104.248.177.248:5432/shopping"
+                        userId="postgres" 
+                        password="Cambiar.2018">
+        </jdbcConnection>
+        
+        <!--Aqui salida es una carpeta, es la carpeta donde el generator pondra los .java-->
+        <javaModelGenerator targetPackage="py.com.shopp.ejb.model" targetProject="Shopp-ejb/src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaModelGenerator>
+        
+        <!-- También podríamos indicar el tipo ANNOTATEDMAPPER -->
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="py.com.shopp.ejb.mapper" targetProject="Shopp-ejb/src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        
+        <table tableName="carritos">
+            <generatedKey column="id_carrito" sqlStatement="JDBC" />
+        </table>
+        <table tableName="categorias">
+            <generatedKey column="id_categoria" sqlStatement="JDBC" />
+        </table>
+        <table tableName="clientes">
+            <generatedKey column="id_cliente" sqlStatement="JDBC" />
+        </table>
+        <table tableName="productos">
+            <generatedKey column="id_producto" sqlStatement="JDBC" />
+        </table>
+        <table tableName="ventas_detalles">
+            <generatedKey column="id_venta_detalle" sqlStatement="JDBC" />
+        </table>
+        <table tableName="ventas_cabecera">
+            <generatedKey column="id_venta_cabecera" sqlStatement="JDBC" />
+        </table>
+        
+        
+    </context>
+</generatorConfiguration>
